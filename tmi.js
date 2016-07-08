@@ -22,23 +22,32 @@ var Rx = require('rx');
 //socket = Rx.DOM.fromWebSocket(url);
 
 var WebSocket = require('ws');
-var socket = new WebSocket(url);
 
-Rx.Observable.fromEvent(socket, 'open')
-  .flatMap(function (it) {
-    console.log(it);
-    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
-    socket.send("PASS SCHMOOPIIE");
-    socket.send("NICK " + "justinfan8989");
-    socket.send("USER " + "justinfan" + "8989");
-    socket.send("JOIN " + "#twitchplayspokemon");
-    return Rx.Observable.fromEvent(socket, 'message');
-  })
-  .subscribe(function (it) {
-    console.log(it);
-  });
+/*
+var WebSocketObservable = (function (__super__) {
+  WebSocketObservable
+});
+function WebSocketObservable(url) {
+}
+WebSocketObservable.
+*/
 
-// ref. https://github.com/Reactive-Extensions/RxJS/issues/112#issuecomment-53477208
+// by fromEvent
+//var socket = new WebSocket(url);
+//Rx.Observable.fromEvent(socket, 'open')
+//  .flatMap(function (it) {
+//    console.log(it);
+//    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
+//    socket.send("PASS SCHMOOPIIE");
+//    socket.send("NICK " + "justinfan8989");
+//    socket.send("USER " + "justinfan" + "8989");
+//    socket.send("JOIN " + "#twitchplayspokemon");
+//    return Rx.Observable.fromEvent(socket, 'message');
+//  })
+//  .subscribe(function (it) {
+//    console.log(it);
+//  });
+
 function SocketObservable(url) {
   var socket = new WebSocket(url);
 
@@ -66,7 +75,6 @@ function SocketObservable(url) {
   return Rx.Subject.create(observer, observable);
 }
 
-/*
 var socket = SocketObservable(url);
 
 socket.subscribe(
@@ -75,6 +83,5 @@ socket.subscribe(
   }, function (e) {
     console.log(e);
   });
-*/
 
 /* vim: set sw=2: */
