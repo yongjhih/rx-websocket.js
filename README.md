@@ -12,6 +12,8 @@ socket.onopen = function (e) {
 };
 ```
 
+After:
+
 ```js
 var rxSocket = RxWebSocket(url);
 
