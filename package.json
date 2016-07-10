@@ -1,23 +1,27 @@
 {
-  "name": "rx-tmi",
+  "name": "rx-websocket",
   "version": "0.0.1",
-  "description": "RxSocket",
+  "description": "RxWebSocket",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yongjhih/rx-tmi.js"
+    "url": "https://github.com/yongjhih/rx-websocket.js"
   },
+  "main": "rx-websocket.js",
+  "files": [
+      "rx-websocket.js",
+      "README.md",
+      "LICENSE"
+  ],
   "keywords": [
     "rx"
   ],
   "bugs": {
-    "url": "https://github.com/yongjhih/rx-tmi.js/issues"
+    "url": "https://github.com/yongjhih/rx-websocket.js/issues"
   },
-  "homepage": "https://github.com/yongjhih/rx-tmi.js",
+  "homepage": "https://github.com/yongjhih/rx-websocket.js",
   "license": "Apache-2.0",
   "dependencies": {
     "ws": "1.1.1",
-    "rx-dom": "~7.0.3",
-    "rxs.io": "~1.1.0",
     "rx": "~4.1.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",

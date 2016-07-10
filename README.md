@@ -17,7 +17,7 @@ After:
 ```js
 var rxSocket = RxWebSocket(url);
 
-rxSocket.open().subscribe(function (e) {
+rxSocket.open().subscribe(function (socket) {
     socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
     socket.send("PASS SCHMOOPIIE");
     socket.send("NICK " + "justinfan8989");
@@ -25,11 +25,29 @@ rxSocket.open().subscribe(function (e) {
     socket.send("JOIN " + "#twitchplayspokemon");
   });
 
-rxSocket.message().subscribe(function (e) {
-    console.log(e);
+rxSocket.message().take(10).subscribe(function (msg) {
+    console.log(msg.data);
   });
+```
 
-rxSocket.send("");
-rxSocket.close();
+or
+
+```js
+rxSocket.open()
+  .doOnNext(function (socket) {
+    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
+    socket.send("PASS SCHMOOPIIE");
+    socket.send("NICK " + "justinfan8989");
+    socket.send("USER " + "justinfan" + "8989");
+    socket.send("JOIN " + "#twitchplayspokemon");
+  })
+  .flatMap(function (socket) {
+    return rxSocket.message();
+  })
+  .take(10)
+  .map(function (msg) { return msg.data })
+  .subscribe(function (msg) {
+    console.log(msg);
+  });
 ```
 
