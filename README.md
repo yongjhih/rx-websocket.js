@@ -15,7 +15,7 @@ socket.onopen = function (e) {
 After:
 
 ```js
-var rxSocket = RxWebSocket(url);
+var rxSocket = new RxWebSocket(url);
 
 rxSocket.open().subscribe(function (socket) {
     socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
@@ -33,6 +33,7 @@ rxSocket.message().take(10).subscribe(function (msg) {
 or
 
 ```js
+var rxSocket = new RxWebSocket(url);
 rxSocket.open()
   .doOnNext(function (socket) {
     socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
