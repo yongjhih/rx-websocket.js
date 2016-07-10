@@ -15,19 +15,19 @@ function RxWebSocket(url) {
           sub.onCompleted();
         };
     });
-    return Rx.Subject.create(this.observer, observable);
+    return Rx.Subject.create(observer, observable);
     //return observable;
   };
 
   this.message = function () {
-    var observable = Rx.Observable.create (function (sub) {
+    var observable = Rx.Observable.create(function (sub) {
       socket.onmessage = sub.onNext.bind(sub);
       socket.onerror = sub.onError.bind(sub);
       socket.onclose = sub.onCompleted.bind(sub);
       return socket.close.bind(socket);
     });
 
-    return Rx.Subject.create(this.observer, observable);
+    return Rx.Subject.create(observer, observable);
     //return observable;
   };
 
