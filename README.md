@@ -10,6 +10,12 @@ socket.onopen = function (e) {
   socket.send("USER " + "justinfan" + "8989");
   socket.send("JOIN " + "#twitchplayspokemon");
 };
+
+var i = 10;
+socket.onmessage = function (msg) {
+  if (i-- > 0) console.log(msg);
+  else socket.close();
+}
 ```
 
 After:
