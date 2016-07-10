@@ -88,47 +88,33 @@ WebSocketObservable.
 var RxWebSocket = require('./rx-websocket.js');
 var rxSocket = new RxWebSocket(url);
 
-//rxSocket.open().subscribe(function (socket) {
-//    console.log('subscribe: onNext');
-//    console.log(socket);
-//    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
-//    socket.send("PASS SCHMOOPIIE");
-//    socket.send("NICK " + "justinfan8989");
-//    socket.send("USER " + "justinfan" + "8989");
-//    socket.send("JOIN " + "#twitchplayspokemon");
-//  });
-//
-//rxSocket.message().take(10).subscribe(function (e) {
-//    console.log(e.data);
-//  });
+rxSocket.message().take(10).subscribe(function (e) {
+    console.log(e.data);
+  });
 
-//rxSocket.open().doOnNext(function (socket) {
-//    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
-//    socket.send("PASS SCHMOOPIIE");
-//    socket.send("NICK " + "justinfan8989");
-//    socket.send("USER " + "justinfan" + "8989");
-//    socket.send("JOIN " + "#twitchplayspokemon");
-//  }).flatMap(function (x) {
-//    return rxSocket.message();
-//  }).subscribe(function (x) {
-//    console.log(x.data);
-//  });
-
-rxSocket.open()
-  .doOnNext(function (socket) {
+rxSocket.open().subscribe(function (socket) {
     socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
     socket.send("PASS SCHMOOPIIE");
     socket.send("NICK " + "justinfan8989");
     socket.send("USER " + "justinfan" + "8989");
     socket.send("JOIN " + "#twitchplayspokemon");
-  })
-  .flatMap(function (socket) {
-    return rxSocket.message();
-  })
-  .take(10)
-  .map(function (msg) { return msg.data })
-  .subscribe(function (msg) {
-    console.log(msg);
   });
+
+//rxSocket.open()
+//  .doOnNext(function (socket) {
+//    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership");
+//    socket.send("PASS SCHMOOPIIE");
+//    socket.send("NICK " + "justinfan8989");
+//    socket.send("USER " + "justinfan" + "8989");
+//    socket.send("JOIN " + "#twitchplayspokemon");
+//  })
+//  .flatMap(function (socket) {
+//    return rxSocket.message();
+//  })
+//  .take(10)
+//  .map(function (msg) { return msg.data })
+//  .subscribe(function (msg) {
+//    console.log(msg);
+//  });
 
 /* vim: set sw=2: */
